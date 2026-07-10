@@ -83,8 +83,8 @@ namespace Helicopter.Core.Scenes.Helicopter
             
             if (!_view.IsOnGround&& _rotateValue != 0)
             {
-                var force = _rotateValue*(_settings.TurnForcePercent - Mathf.Abs(_model.MoveValue.y));
-                _view.Rigidbody.AddRelativeTorque(0f, force, 0, ForceMode.Acceleration);
+                var force = _rotateValue*(_settings.TurnForcePercent - Mathf.Abs(_model.MoveValue.y))*100f;
+                _view.Rigidbody.AddRelativeTorque(0f, force, 0);
             }
 
             
@@ -102,15 +102,15 @@ namespace Helicopter.Core.Scenes.Helicopter
         {
             var turn = _settings.TurnForce * Mathf.Lerp(_model.MoveValue.x, _model.MoveValue.x * (_settings.TurnTiltForcePercent - Mathf.Abs(_model.MoveValue.y)), Mathf.Max(0f, _model.MoveValue.y));
             _turnCache = Mathf.Lerp(_turnCache, turn, Time.fixedDeltaTime * _settings.TurnForce);
-            _view.Rigidbody.AddRelativeTorque(0f, _turnCache * _view.Rigidbody.mass, 0f);
-            _view.Rigidbody.AddRelativeForce(Vector3.forward * Mathf.Max(0f, _model.MoveValue.y * _settings.ForwardForce),ForceMode.Acceleration);
+            _view.Rigidbody.AddRelativeTorque(0f, _turnCache * 100f, 0f);
+            _view.Rigidbody.AddRelativeForce(Vector3.forward * Mathf.Max(0f, _model.MoveValue.y * _settings.ForwardForce*100f));
         }
 
         private void HandleLift()
         {
             var upForce = 1 - Mathf.Clamp(_view.Rigidbody.transform.position.y / _settings.EffectiveHeight, 0, 1);
-            upForce = Mathf.Lerp(0f, _model.EngineForce, upForce);
-            _view.Rigidbody.AddRelativeForce(Vector3.up * upForce, ForceMode.Acceleration);
+            upForce = Mathf.Lerp(0f, _model.EngineForce, upForce)* 100f;
+            _view.Rigidbody.AddRelativeForce(Vector3.up * upForce);
         }
         
         
@@ -120,7 +120,7 @@ namespace Helicopter.Core.Scenes.Helicopter
             var y = Mathf.Lerp(_model.RotateValue.y, _model.MoveValue.y * _settings.ForwardTiltForce, Time.deltaTime);
             
             _model.RotateValue = new Vector2(x, y);
-            _view.Rigidbody.transform.localRotation = Quaternion.Euler(_model.RotateValue.y, _view.Rigidbody.transform.localEulerAngles.y, -_model.RotateValue.x);
+            _view.Rigidbody.transform.localRotation = Quaternion.Euler(_model.RotateValue.y, _view.transform.localEulerAngles.y, -_model.RotateValue.x);
         }
     }
 }

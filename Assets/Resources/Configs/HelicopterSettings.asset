@@ -17,5 +17,5 @@ MonoBehaviour:
   ForwardForce: 15
   ForwardTiltForce: 20
   TurnTiltForce: 30
-  EffectiveHeight: 20
+  EffectiveHeight: 50
   TurnTiltForcePercent: 1.5
