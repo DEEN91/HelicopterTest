@@ -5,9 +5,12 @@ namespace Helicopter.Core.Scenes.Helicopter
     public class HelicopterModel
     {
         private float _engineForce;
-        
+        private Vector2 _rotateValue;
+        private Quaternion _localRotation;
+
         public Vector2 MoveValue { get; set; }
-        public Vector2 RotateValue { get; set; }
+        public ref Vector2 RotateValue => ref _rotateValue;
+        public ref Quaternion LocalRotation => ref _localRotation;
         public float EngineForce
         {
             get { return _engineForce; }
