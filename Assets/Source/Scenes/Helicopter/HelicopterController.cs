@@ -131,6 +131,8 @@ namespace Helicopter.Core.Scenes.Helicopter
             HandleLift();
             HandleMove();
             HandleTilt();
+
+            Model.Height = _view.transform.position.y;
         }
         
         private void HandleMove()

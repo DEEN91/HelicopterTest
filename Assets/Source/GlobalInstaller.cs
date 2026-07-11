@@ -1,6 +1,7 @@
 ﻿using Helicopter.Core.Managers.Audio;
 using Helicopter.Core.Managers.Audio.Signals;
 using Helicopter.Core.Managers.Camera;
+using Helicopter.Core.Managers.Camera.Signals;
 using Helicopter.Core.Scenes.Helicopter;
 using Helicopter.Core.Scenes.Helicopter.HUD;
 using Helicopter.Core.Scenes.UI;
@@ -77,6 +78,7 @@ namespace Helicopter.Core
 
         private void BindCameraManager()
         {
+            Container.DeclareSignal<CameraChangedSignal>();
             Container.BindInterfacesTo<CameraManager>().AsSingle().NonLazy();
         }
     }
