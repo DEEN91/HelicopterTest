@@ -16,6 +16,7 @@ MonoBehaviour:
   TurnForce: 10
   ForwardForce: 15
   ForwardTiltForce: 20
-  TurnTiltForce: 30
+  TurnTiltForce: 50
   EffectiveHeight: 50
   TurnTiltForcePercent: 1.5
+  CrashSpeed: 12

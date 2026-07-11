@@ -13,6 +13,8 @@ namespace Helicopter.Core.Scenes.Helicopter
         public ref Quaternion LocalRotation => ref _localRotation;
         public float Height { get; set; }
 
+        public float CrashSpeed { get; set; }
+
         public float EngineForce
         {
             get { return _engineForce; }

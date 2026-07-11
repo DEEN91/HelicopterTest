@@ -39,6 +39,9 @@ namespace Helicopter.Core.Scenes.Helicopter
             _playerInputService.SubscribeToLift(LiftHandler);
             _playerInputService.SubscribeToMove(MoveHandler);
             _playerInputService.SubscribeToRotate(RotateHandler);
+
+            Model.CrashSpeed = _settings.CrashSpeed;
+            _view.Exploded += ViewOnExploded;
         }
 
         public void Dispose()
@@ -160,6 +163,12 @@ namespace Helicopter.Core.Scenes.Helicopter
             var localRotation = Quaternion.Euler(Model.RotateValue.y, _view.transform.localEulerAngles.y, -Model.RotateValue.x);
             Model.LocalRotation = localRotation;
             _view.transform.localRotation = localRotation;
+        }
+        
+        private void ViewOnExploded()
+        {
+            Debug.Log($"Helicopter View On Exploded");
+            Reset(); //TODO: Ignore all inputs, and show explosion
         }
     }
 }

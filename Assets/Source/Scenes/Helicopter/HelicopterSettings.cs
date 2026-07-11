@@ -12,6 +12,6 @@ namespace Helicopter.Core.Scenes.Helicopter
         public float TurnTiltForce = 30f;
         public float EffectiveHeight = 100f;
         public float TurnTiltForcePercent = 1.5f;
-        
+        public float CrashSpeed = 12f;
     }
 }
