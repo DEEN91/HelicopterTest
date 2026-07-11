@@ -8,13 +8,15 @@ namespace Helicopter.Core.Services.PlayerInput
 {
     public class PlayerInputService : IPlayerInputService, ITickable
     {
-        private readonly InputAction _moveAction;
-        private readonly InputAction _rotateAction;
-        private readonly InputAction _liftAction;
+        private InputAction _moveAction;
+        private InputAction _rotateAction;
+        private InputAction _liftAction;
+        private InputAction _cameraAction;
         
         private readonly List<Action<Vector2>> _moveSubscriptions = new();
         private readonly List<Action<float>> _rotateSubscriptions = new();
         private readonly List<Action<float>> _liftSubscriptions = new();
+        private readonly List<Action>_cameraChangedSubscriptions = new();
 
         private Vector2 _moveValue;
         private float _rotateValue;
@@ -73,20 +75,38 @@ namespace Helicopter.Core.Services.PlayerInput
 
         public PlayerInputService(InputActionAsset inputActionAsset)
         {
-            var actionMap = inputActionAsset.FindActionMap("Helicopter");
-            
-            _moveAction = actionMap.FindAction("Move");
-            _rotateAction = actionMap.FindAction("Tilt");
-            _liftAction = actionMap.FindAction("Lift");
-            
-            actionMap.Enable();
+            EnableHelicopterMap(inputActionAsset);
+            EnableUIMap(inputActionAsset);
         }
-        
+
+        private void EnableHelicopterMap(InputActionAsset inputActionAsset)
+        {
+            var helicopterActionMap = inputActionAsset.FindActionMap("Helicopter");
+            
+            _moveAction = helicopterActionMap.FindAction("Move");
+            _rotateAction = helicopterActionMap.FindAction("Tilt");
+            _liftAction = helicopterActionMap.FindAction("Lift");
+            
+            helicopterActionMap.Enable();
+        }
+
+        private void EnableUIMap(InputActionAsset inputActionAsset)
+        {
+            var UIActionMap = inputActionAsset.FindActionMap("GameUI");
+            _cameraAction = UIActionMap.FindAction("CameraSwitch");
+            UIActionMap.Enable();
+        }
+
         public void Tick()
         {
             MoveValue = _moveAction.ReadValue<Vector2>(); 
             RotateValue = _rotateAction.ReadValue<float>();
             LiftValue = _liftAction.ReadValue<float>();
+
+            if (_cameraAction.IsPressed())
+            {
+                _cameraChangedSubscriptions.ForEach(x => x?.Invoke());
+            }
         }
 
         public void SubscribeToMove(Action<Vector2> action)
@@ -104,6 +124,11 @@ namespace Helicopter.Core.Services.PlayerInput
             _liftSubscriptions.Add(action);
         }
 
+        public void SubscribeToCameraChange(Action action)
+        {
+            _cameraChangedSubscriptions.Add(action);
+        }
+
         public void UnsubscribeFromMove(Action<Vector2> action)
         {
             _moveSubscriptions.Remove(action);
@@ -117,6 +142,11 @@ namespace Helicopter.Core.Services.PlayerInput
         public void UnsubscribeFromLift(Action<float> action)
         {
             _liftSubscriptions.Remove(action);
+        }
+
+        public void UnsubscribeToCameraChange(Action action)
+        {
+            _cameraChangedSubscriptions.Remove(action);
         }
     }
 }

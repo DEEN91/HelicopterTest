@@ -1,5 +1,6 @@
 ﻿using Helicopter.Core.Managers.Audio;
 using Helicopter.Core.Managers.Audio.Signals;
+using Helicopter.Core.Managers.Camera;
 using Helicopter.Core.Scenes.Helicopter;
 using Helicopter.Core.Scenes.Helicopter.HUD;
 using Helicopter.Core.Scenes.UI;
@@ -26,6 +27,8 @@ namespace Helicopter.Core
         private UIView _uiView;
         [SerializeField]
         private AudioManager _audioManager;
+        [SerializeField]
+        private CameraManager _cameraManager;
         
         public override void InstallBindings()
         {
@@ -39,6 +42,7 @@ namespace Helicopter.Core
             BindGameService();
 
             BindAudioManager();
+            BindCameraManager();
         }
 
         private void BindHelicopter()
@@ -69,6 +73,11 @@ namespace Helicopter.Core
             Container.BindInterfacesTo<AudioManager>().FromInstance(_audioManager).AsSingle().NonLazy();
             Container.DeclareSignal<SetSoundVolumeSignal>();
             Container.DeclareSignal<SetMusicVolumeSignal>();
+        }
+
+        private void BindCameraManager()
+        {
+            Container.BindInterfacesTo<CameraManager>().AsSingle().NonLazy();
         }
     }
 }

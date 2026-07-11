@@ -1268,6 +1268,45 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "GameUI",
+            "id": "98ea4334-e727-4ab9-a285-874c7239bc85",
+            "actions": [
+                {
+                    "name": "CameraSwitch",
+                    "type": "PassThrough",
+                    "id": "d4fae174-50d8-4c3a-9d3d-155e7a6e2e16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "40674a7d-58f8-4e3b-ba71-fa0d865dee77",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7ce7492-2005-48db-90d3-7db4335c0087",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

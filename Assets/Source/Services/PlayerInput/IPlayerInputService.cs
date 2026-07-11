@@ -8,8 +8,10 @@ namespace Helicopter.Core.Services.PlayerInput
         void SubscribeToMove(Action<Vector2> action);
         void SubscribeToRotate(Action<float> action);
         void SubscribeToLift(Action<float> action);
+        void SubscribeToCameraChange (Action action);
         void UnsubscribeFromMove(Action<Vector2> action);
         void UnsubscribeFromRotate(Action<float> action);
         void UnsubscribeFromLift(Action<float> action);
+        void UnsubscribeToCameraChange (Action action);
     }
 }
