@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "W / S / \u2191 / \u2193 / Left stick - <b>Pitch </b>\nA / D / \u2190 /
     \u2192 / Left stick - <b>Roll</b>\nQ / E / Bumpers - <b>Yaw</b>\nSpace / Left
-    Ctrl / Right stick - <b>Lift up/down</b>\nC / Option button- <b>Change camerpa</b>\n"
+    Ctrl / Right stick - <b>Lift up/down</b>\nC / Option button- <b>Change camera</b>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
