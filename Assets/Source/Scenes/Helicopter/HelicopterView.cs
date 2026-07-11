@@ -51,7 +51,6 @@ namespace Helicopter.Core.Scenes.Helicopter
             
             _topRotorComponent.RotorSpeed = _model.EngineForce;
             _tailRotorComponent.RotorSpeed = _model.EngineForce * 0.8f;
-            Debug.Log(@"Engine force" + _model.EngineForce);
         }
     }
 }
