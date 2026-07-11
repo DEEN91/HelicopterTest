@@ -8,12 +8,17 @@ namespace Helicopter.Core.Scenes.Helicopter.HUD
     {
         [SerializeField]
         private CompasComponent _compasComponent;
+        [SerializeField]
+        private HeightComponent _heightComponent;
+        [SerializeField]
+        private HorizonComponent _horizonComponent;
 
         private HelicopterHUDModel _model;
 
 
         public void ApplyModel(HelicopterHUDModel helicopterHUDModel)
         {
+            _heightComponent.SetMaxHeight(helicopterHUDModel.EffectiveHeight);
             _model =  helicopterHUDModel;
         }
 
@@ -23,6 +28,14 @@ namespace Helicopter.Core.Scenes.Helicopter.HUD
                 return;
             
             _compasComponent.SetCompasDirection(_model.ViewDirection);
+            _heightComponent.SetCurrentHeight(_model.CurrentHeight);
+            _horizonComponent.SetPitchAndRoll(_model.Pitch, _model.Roll);
+        }
+
+        public void SetHeightAndHorizonActive(bool value)
+        {
+            _heightComponent.gameObject.SetActive(value);
+            _horizonComponent.gameObject.SetActive(value);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cinemachine;
+using Helicopter.Core.Managers.Camera.Signals;
 using Helicopter.Core.Services.PlayerInput;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,8 @@ namespace Helicopter.Core.Managers.Camera
         
         [Inject]
         private IPlayerInputService _playerInputService;
+        [Inject]
+        private SignalBus _signalBus;
 
         private int _cameraIndex;
 
@@ -56,6 +59,11 @@ namespace Helicopter.Core.Managers.Camera
             {
                 _cameras[i].Camera.Priority = i == CameraIndex ? 1 : 0;
             }
+            var signal = new CameraChangedSignal()
+            {
+                Type =  CurrentCameraType
+            };
+            _signalBus.Fire(signal);
         }
     }
 

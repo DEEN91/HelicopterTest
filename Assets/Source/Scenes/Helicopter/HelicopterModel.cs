@@ -11,6 +11,8 @@ namespace Helicopter.Core.Scenes.Helicopter
         public Vector2 MoveValue { get; set; }
         public ref Vector2 RotateValue => ref _rotateValue;
         public ref Quaternion LocalRotation => ref _localRotation;
+        public float Height { get; set; }
+
         public float EngineForce
         {
             get { return _engineForce; }
