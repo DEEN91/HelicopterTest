@@ -8,7 +8,7 @@ namespace Helicopter.Core.Scenes.Helicopter.HUD
         private readonly HelicopterHUDModel _model;
         
         [Inject]
-        private IHelicopterPresenter _helicopterPresenter;
+        private IHelicopterController _helicopterController;
         
         private HelicopterModel _helicopterModel;
         
@@ -22,7 +22,7 @@ namespace Helicopter.Core.Scenes.Helicopter.HUD
 
         public void Initialize()
         {
-            _helicopterModel = _helicopterPresenter.Model;
+            _helicopterModel = _helicopterController.Model;
             _model.SetHelicopterModel(_helicopterModel);
         }
     }

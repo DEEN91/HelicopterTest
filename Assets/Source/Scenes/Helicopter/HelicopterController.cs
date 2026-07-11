@@ -1,14 +1,16 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Helicopter.Core.Services.PlayerInput;
 using UnityEngine;
 using Zenject;
 
 namespace Helicopter.Core.Scenes.Helicopter
 {
-    public class HelicopterPresenter : IInitializable, IDisposable, IFixedTickable, IHelicopterPresenter
+    public class HelicopterController : IInitializable, IDisposable, IFixedTickable, IHelicopterController
     {
         private readonly HelicopterView _view;
         public HelicopterModel Model { get; private set; }
+       
 
         [Inject]
         private IPlayerInputService _playerInputService;
@@ -20,12 +22,16 @@ namespace Helicopter.Core.Scenes.Helicopter
         private float _rotateValue;
         
         private float _turnCache;
+        private Vector3 _targetPos;
+        private Quaternion _targetRot;
 
-        public HelicopterPresenter(HelicopterView view)
+        public HelicopterController(HelicopterView view)
         {
             _view = view;
             Model = new HelicopterModel();
             _view.ApplyModel(Model);
+            _targetPos = _view.transform.position;
+            _targetRot = _view.transform.rotation;
         }
 
         public void Initialize()
@@ -40,6 +46,35 @@ namespace Helicopter.Core.Scenes.Helicopter
             _playerInputService.UnsubscribeFromLift(LiftHandler);
             _playerInputService.UnsubscribeFromMove(MoveHandler);
             _playerInputService.UnsubscribeFromRotate(RotateHandler);
+        }
+        
+        public async void Reset()
+        {
+            _view.Rigidbody.linearVelocity = Vector3.zero;
+            _view.Rigidbody.angularVelocity = Vector3.zero;
+            Model.EngineForce = 0;
+            Model.MoveValue = Vector2.zero;
+            Model.RotateValue = Vector2.zero;
+            _liftValue = 0;
+            _moveValue =  Vector2.zero;
+            _rotateValue = 0;
+            _turnCache = 0;
+            await UniTask.WaitForFixedUpdate();
+
+            _view.transform.position = _targetPos;
+            _view.transform.rotation = _targetRot;
+            await UniTask.WaitForFixedUpdate();
+
+            _view.Rigidbody.linearVelocity = Vector3.zero;
+            _view.Rigidbody.angularVelocity = Vector3.zero;
+            Model.EngineForce = 0;
+            Model.MoveValue = Vector2.zero;
+            Model.RotateValue = Vector2.zero;
+            _liftValue = 0;
+            _moveValue =  Vector2.zero;
+            _rotateValue = 0;
+            _turnCache = 0;
+            await UniTask.WaitForFixedUpdate();
         }
 
         private void MoveHandler(Vector2 obj)
@@ -108,7 +143,7 @@ namespace Helicopter.Core.Scenes.Helicopter
 
         private void HandleLift()
         {
-            var upForce = 1 - Mathf.Clamp(_view.Rigidbody.transform.position.y / _settings.EffectiveHeight, 0, 1);
+            var upForce = 1 - Mathf.Clamp(_view.transform.position.y / _settings.EffectiveHeight, 0, 1);
             upForce = Mathf.Lerp(0f, Model.EngineForce, upForce)* 100f;
             _view.Rigidbody.AddRelativeForce(Vector3.up * upForce);
         }
@@ -122,7 +157,7 @@ namespace Helicopter.Core.Scenes.Helicopter
 
             var localRotation = Quaternion.Euler(Model.RotateValue.y, _view.transform.localEulerAngles.y, -Model.RotateValue.x);
             Model.LocalRotation = localRotation;
-            _view.Rigidbody.transform.localRotation = localRotation;
+            _view.transform.localRotation = localRotation;
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace Helicopter.Core.Scenes.Helicopter
 {
-    public interface IHelicopterPresenter
+    public interface IHelicopterController
     {
         HelicopterModel Model { get; }
+
+        void Reset();
     }
 }
