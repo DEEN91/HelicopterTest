@@ -22,7 +22,7 @@ namespace Helicopter.Core.Scenes.Helicopter
             {
                 if (value < 0)
                     value = 0;
-                _engineForce = value;
+                _engineForce = Mathf.Clamp(value,0,3000);
             }
         }
     }

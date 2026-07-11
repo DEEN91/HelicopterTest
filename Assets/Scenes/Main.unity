@@ -21141,8 +21141,8 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9c9368e90ef327541837fcfd919be540, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.444
-  m_Pitch: 1
+  m_Volume: 0.8
+  m_Pitch: 0
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -21225,6 +21225,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &605253145 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+  m_PrefabInstance: {fileID: 991705937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &605253148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605253140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d854a7c9564a31a94ad79b61b9f90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Helicopter.Core::Helicopter.Core.Scenes.Helicopter.Components.RotorComponent
+  _axis: 0
+  _rotor: {fileID: 605253145}
+  _audioSource: {fileID: 605253144}
 --- !u!1 &607486614
 GameObject:
   m_ObjectHideFlags: 0
@@ -34382,6 +34402,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11100000, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -34395,9 +34459,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
       insertIndex: -1
       addedObject: {fileID: 605253144}
+    - targetCorrespondingSourceObject: {fileID: 100008, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 605253148}
     - targetCorrespondingSourceObject: {fileID: 100010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1658636834}
+    - targetCorrespondingSourceObject: {fileID: 100010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1658636838}
   m_SourcePrefab: {fileID: 100100000, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
 --- !u!1001 &991778183
 PrefabInstance:
@@ -45416,6 +45486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Helicopter.Core::Helicopter.Core.Source.HelicopterController
   _rigidbody: {fileID: 1329387585}
+  _topRotorComponent: {fileID: 1658636838}
+  _tailRotorComponent: {fileID: 605253148}
 --- !u!1001 &1331405423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54081,7 +54153,7 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: 9c9368e90ef327541837fcfd919be540, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -54164,6 +54236,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &1658636835 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400010, guid: ff3e8c3aad864db4394551f29cc6f224, type: 3}
+  m_PrefabInstance: {fileID: 991705937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1658636838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658636830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d854a7c9564a31a94ad79b61b9f90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Helicopter.Core::Helicopter.Core.Scenes.Helicopter.Components.RotorComponent
+  _axis: 1
+  _rotor: {fileID: 1658636835}
+  _audioSource: {fileID: 1658636834}
 --- !u!1 &1662933570
 GameObject:
   m_ObjectHideFlags: 0

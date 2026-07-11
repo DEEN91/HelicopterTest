@@ -101,9 +101,9 @@ namespace Helicopter.Core.Scenes.Helicopter
             float tempX = 0;
 
             if (_liftValue > 0)
-                Model.EngineForce += 1f;
+                Model.EngineForce += 10f;
             else if(_liftValue < 0)
-                Model.EngineForce -= 1.6f;
+                Model.EngineForce -= 16f;
             
 
             if (!_view.IsOnGround)
@@ -149,7 +149,7 @@ namespace Helicopter.Core.Scenes.Helicopter
         private void HandleLift()
         {
             var upForce = 1 - Mathf.Clamp(_view.transform.position.y / _settings.EffectiveHeight, 0, 1);
-            upForce = Mathf.Lerp(0f, Model.EngineForce, upForce)* 100f;
+            upForce = Mathf.Lerp(0f, Model.EngineForce, upForce);
             _view.Rigidbody.AddRelativeForce(Vector3.up * upForce);
         }
         
